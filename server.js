@@ -2,7 +2,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     app = express(),
-    PORT = process.env.PORT || 7777;
+    PORT = process.env.PORT || 7777,
+    route = require('./controllers/burgers_controller.js');
+app.use("/", route);
 
 app.use(methodOverride('_method'));
 
@@ -13,11 +15,12 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({type: "application/vnd.api+json"}));
 
 // Static directory
-app.use(express.static("app/public"));
+app.use(express.static("public"));
 
-// ROUTES
-require("./app/routes/api-routes.js")(app);
-require("./app/routes/html-routes.js")(app);
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // LISTEN TO ME
 app.listen(PORT, function () {

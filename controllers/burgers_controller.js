@@ -3,7 +3,7 @@ var express = require('express'),
     burger = require('../models/burger');
 
 route.get('/', function (req, res) {
-    burger.selectAll(function (data) {
+    burger.all(function (data) {
         var hbsOb = {
             burgers: data
         };
@@ -21,9 +21,9 @@ route.post("/", function (req, res) {
 });
 
 route.put("/:id", function (req, res) {
+    console.log('hi');
     var condition = "id = " + req.params.id;
-
-    burger.updateOne(
+    burger.update(
         {
             devoured: req.body.devoured
         },
