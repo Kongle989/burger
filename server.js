@@ -4,8 +4,8 @@ var express = require('express'),
     app = express(),
     PORT = process.env.PORT || 7777,
     route = require('./controllers/burgers_controller.js');
-app.use("/", route);
 
+var exphbs = require("express-handlebars");
 app.use(methodOverride('_method'));
 
 // DATA PARSING
@@ -17,7 +17,7 @@ app.use(bodyParser.json({type: "application/vnd.api+json"}));
 // Static directory
 app.use(express.static("public"));
 
-var exphbs = require("express-handlebars");
+app.use("/", route);
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

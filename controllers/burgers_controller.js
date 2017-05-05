@@ -12,9 +12,10 @@ route.get('/', function (req, res) {
 });
 
 route.post("/", function (req, res) {
+    console.log(req.body);
     burger.insert(
         ["burger_name", "devoured"],
-        [req.body.burger_name, req.body.devoured],
+        [req.body.burger3, 0],
         function () {
             res.redirect("/");
         });
