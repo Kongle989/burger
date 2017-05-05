@@ -22,12 +22,9 @@ route.post("/", function (req, res) {
 });
 
 route.put("/:id", function (req, res) {
-    console.log('hi');
     var condition = "id = " + req.params.id;
     burger.update(
-        {
-            devoured: req.body.devoured
-        },
+        {devoured: req.body.devoured},
         condition,
         function () {
             res.redirect("/");
